@@ -1,0 +1,34 @@
+{
+  "tests": [
+    {
+      "name": "incident edges test",
+      "setup": "mvn compile",
+      "run": "mvn -Dtest=AssignmentTest#testIncidentEdges test",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 1,
+      "points": 15
+    },
+    {
+      "name": "initialize single source test",
+      "setup": "mvn compile",
+      "run": "mvn -Dtest=AssignmentTest#testInitializeSingleSource test",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 1,
+      "points": 15
+    },
+    {
+      "name": "dijkstra test",
+      "setup": "mvn compile",
+      "run": "mvn -Dtest=AssignmentTest#testDijkstra test",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 1,
+      "points": 30
+    }
+  ]
+}
