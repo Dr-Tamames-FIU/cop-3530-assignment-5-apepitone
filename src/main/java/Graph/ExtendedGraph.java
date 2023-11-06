@@ -8,17 +8,54 @@ public class ExtendedGraph extends AbstractGraph {
         super(vertices, edges);
     };
 
-    /**
-     * Return list of edges around vertex
-     * @param v the vertex to get edges from
-     */
-    // ** TO DO **
+
+
+
+    
     public List<Edge> incidentEdges(Vertex v) {
-        // Returns the edges around vertex v
 
-        return new ArrayList<Edge>();
-    };
+        List<Edge> incidentEdges = new ArrayList<>();
 
+
+            for (Edge edge : edges) {
+
+            if (edge.vertex1.getLabel().equals(v.getLabel()) || edge.vertex2.getLabel().equals(v.getLabel())) {
+
+                incidentEdges.add(edge);
+
+        }
+
+    }
+
+    return incidentEdges;
+
+}
+
+
+    public List<Vertex> getVertices() {
+
+        return vertices; 
+        
+    }
 
 
 }
+
+
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+
+
+

@@ -1,4 +1,7 @@
 package Graph;
+
+import java.util.List;
+
 /**
  * Representation of a graph vertex
  */
@@ -25,4 +28,23 @@ public class Vertex {
     public String getLabel() {
         return label;
     }
+   
+
+    public int getIndex(ExtendedGraph extendedGraph) {
+
+        List<Vertex> vertices = extendedGraph.getVertices(); 
+            for (int i = 0; i < vertices.size(); i++) {
+
+            if (vertices.get(i).getLabel().equals(this.getLabel())) {
+
+                return i;
+
+            }
+
+        }
+
+        return -1; // Return -1 if the vertex is not found
+        
+    }
+
 }

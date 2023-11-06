@@ -40,78 +40,78 @@ public class Path {
 
     }
 
-    // ** TO DO **
-    public static List<PathVertex> dijkstra(ExtendedGraph g, Vertex v){
-        // Instantiating and assigning the paths to be tracked after each iteration
-        // ...
+    
+   public static List<PathVertex> dijkstra(ExtendedGraph g, Vertex v){
 
-        // Create a priority queue that is exactly the same thing as paths but
-        // used for extracting minimum. This gets one element smaller after each iteration (see below)
-        // ...
+        List<PathVertex> paths = initializeSingleSource(g, v);
 
-        // while...
-            // always starts each iteration with the smallest PathVertex, pv
-            // ...
+        PriorityQueue<PathVertex> pq = new PriorityQueue<>(Comparator.comparingInt(paths::indexOf));
 
-            // We set the visited attribute of the smallest PathVertex to true
-            // so that we can skip it when updating the priority queue.
-            // ...
+        PathVertex sourcePathVertex = paths.get(v.getIndex(g));
 
-            // retrieve all edges incident to pv
-            // ...
+        sourcePathVertex.distance = 0; 
 
-            // look into (not visit) all vertices incident to pv
-            // for...
-                // ...
+        pq.add(sourcePathVertex);
 
-                // since the vertex (incidentVertex of type Vertex) returned from incident vertex
-                // does not hold information about its current distance to the source,
-                // we look for its exact counterpart in paths (incidentPathVertex of type PathVertex):
-                // for...
-                    // ...
-                    // ...
+            while (!pq.isEmpty()) {
 
-                        // see IF the edge needs to be relaxed
-                        // ...
+                PathVertex pv = pq.poll();
 
-                            // if so, update the path vertices in pq
-                            // ...
+            if (pv.visited) continue;
 
-        return new ArrayList<PathVertex>();
-    }
+                pv.visited = true;
 
-    private static PriorityQueue<PathVertex> updatePriorityQueueDistances(List<PathVertex> paths) {
-        PriorityQueue<PathVertex> pq = new PriorityQueue<>(new SortByDistance());
-        for(int i = 0; i < paths.size(); i++) {
-            PathVertex currentPV = paths.get(i);
+                 List<Edge> edges = g.incidentEdges(pv);
 
-            // If the currentPV is visited, skip
-            // This is how the priority queue gets smaller
-            if(currentPV.visited) {
-                continue;
+            for (Edge edge : edges) {
+
+                Vertex incidentVertex = (edge.vertex1 == pv) ? edge.vertex2 : edge.vertex1;
+
+                int incidentVertexIndex = incidentVertex.getIndex(g);
+
+                PathVertex incidentPathVertex = paths.get(incidentVertexIndex);
+
+                int newDistance = pv.distance + edge.weight;
+
+            if (newDistance < incidentPathVertex.distance) {
+
+                incidentPathVertex.distance = newDistance;
+
+                incidentPathVertex.parent = pv;
+
+                pq.remove(incidentPathVertex);
+
+                pq.add(incidentPathVertex);
+
             }
-
-            pq.add(currentPV);
         }
-        return pq;
     }
 
+    return paths;
+}
     // ** TO DO **
+
     public static List<PathVertex> initializeSingleSource(ExtendedGraph g, Vertex s) {
-        // This sets every PathVertex's parent to null and its distance to the source infinity
-        // except for the source (s) where its distance is 0
-        // get the vertices (which is of type Vertex) from g and create a List of type PathVertex
-        return new ArrayList<PathVertex>();
+
+        List<Vertex> vertices = g.getVertices();
+
+        List<PathVertex> pathVertices = new ArrayList<>();
+
+            for (Vertex v : vertices) {
+
+            PathVertex pathVertex = new PathVertex(v.getLabel());
+
+            pathVertex.parent = null;
+
+            pathVertex.distance = (v == s) ? 0 : Integer.MAX_VALUE;
+
+            pathVertices.add(pathVertex);
+
     }
 
-    public static boolean relaxEdge(PathVertex v, PathVertex w, int weight) {
-        if(!v.distance.equals(Integer.MAX_VALUE) && v.distance + weight < w.distance) {
-            w.distance = v.distance + weight;
-            w.parent = v;
-            return true;
-        }
-        return false;
-    }
+    return pathVertices;
+    
+}     
 
     // *** ignore below ***
 

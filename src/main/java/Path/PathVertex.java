@@ -19,4 +19,5 @@ public class PathVertex extends Vertex{
         String vistiedString = visited ? "visited" : "not visited";
         return "(parent: " + parentString + " distance: " + this.distance + " destination: " + this.getLabel() + ")";
     }
+
 }

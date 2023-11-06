@@ -6,6 +6,10 @@ import java.util.List;
  */
 public interface Graph {
 
+    
+
+
+
     /**
      * Return the list of vertices of this graph
      * @return the vertices as a list (which is anything iterable)
